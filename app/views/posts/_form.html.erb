@@ -1,0 +1,17 @@
+<div class="form">
+    <div class="form-body">
+        <%= form_for(@post) do |f| %>
+        <p>タイトル</p>
+        <p>
+            <%= f.text_field :title %>
+        </p>
+        <p>内容</p>
+        <p>
+            <%= f.text_area :body %>
+        </p>
+        <p>
+            <%= f.submit %>
+        </p>
+        <% end %>
+    </div>
+</div>
