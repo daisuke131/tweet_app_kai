@@ -1,6 +1,15 @@
 <div class="main posts-show">
     <div class="container">
         <div class="posts-show-item">
+            <div class="post-user-name">
+                <!-- ユーザーの画像が表示されるように、以下のsrcの中を埋めてください -->
+                <% if @user.image_url %>
+                <%= image_tag @user.image_url(:thumb) %>
+                <% else %>
+                <%= image_tag '/user_images/default_image.jpg', :size => '100x100' %>
+                <% end %>
+                <%= link_to(@user.name, "/users/#{@user.id}") %>
+            </div>
             <p>
                 <%= @post.title %>
             </p>
@@ -10,6 +19,8 @@
             <div class="post-time">
                 <%= @post.created_at %>
             </div>
+
+            <% if current_user.id == @post.user.id %>
             <div class="post-menus">
                 <%= link_to("[編集]", edit_post_path) %>
                 <%= link_to("[削除]", 
@@ -17,6 +28,8 @@
 	method: :delete, 
 data: {confirm: '本当に削除しますか？'}) %>
             </div>
+            <% end %>
+
         </div>
     </div>
 </div>

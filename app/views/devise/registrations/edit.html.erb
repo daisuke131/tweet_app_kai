@@ -1,0 +1,58 @@
+<div class="main users-new">
+  <div class="container">
+    <div class="form-heading">ユーザー編集</div>
+    <div class="form users-form">
+      <div class="form-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+        <div class="form-error">
+          <%= render "devise/shared/error_messages", resource: resource %>
+        </div>
+
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for:
+          <%= resource.unconfirmed_email %>
+        </div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :password %> <i>(変更したい場合は入力してください)</i>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder:"#{@minimum_password_length}文字以上" %>
+          <% if @minimum_password_length %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder:"#{@minimum_password_length}文字以上" %>
+        </div>
+
+        <div class="field">
+          画像登録
+          <%= f.file_field :image %>
+        </div>
+
+        <div class="field">
+          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+          <%= f.password_field :current_password, autocomplete: "current-password" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "修正" %>
+        </div>
+        <% end %>
+<br><br>
+        <div class="unsubscribe">
+            <%= button_to "アカウント削除", registration_path(resource_name), data: { confirm: "本当に削除しますか?" }, method: :delete %>
+          </div>
+          <%#= link_to "Back", :back %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
