@@ -4,11 +4,7 @@
     <% @users.each do |user| %>
     <div class="users-index-item">
       <div class="user-left">
-        <% if user.image_url %>
         <%= image_tag user.image_url(:thumb) %>
-        <% else %>
-        <%= image_tag '/user_images/default_image.jpg', :size => '100x100' %>
-        <% end %>
       </div>
       <div class="user-right">
         <%= link_to(user.name, user_path(user)) %>

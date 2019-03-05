@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'home#top'
   get 'about' => 'home#about'
+  get 'users/:id/likes' => "users#likes"
   devise_for :users
   resources :users, only: [:index, :show]
-  resources :posts
-    # resources :users do
-  #   resources :posts
-  # end
+  resources :posts do
+    resources :likes
+    resources :comments
+  end
 end

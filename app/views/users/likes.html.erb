@@ -1,7 +1,7 @@
 <div class="main user-show">
   <div class="container">
     <div class="user">
-        <%= image_tag @user.image_url(:thumb) %>
+      <%= image_tag @user.image_url(:thumb) %>
       <h2><%= @user.name %></h2>
       <p><%= @user.email %></p>
       <% if @user.id == current_user.id %>
@@ -10,14 +10,16 @@
     </div>
     
     <ul class="user-tabs">
-      <li class="active"><%= link_to("投稿", user_path(@user)) %></li>
-      <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+      <li><%= link_to("投稿", user_path(@user)) %></li>
+      <li class="active"><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
     </ul>
     
-    <% @user.posts.each do |post| %>
+    <% @likes.each do |like| %>
+      <% post = Post.find_by(id: like.post_id) %>
+      
       <div class="posts-index-item">
         <div class="post-left">
-          <%= image_tag @user.image_url(:thumb) %>
+        <%= image_tag post.user.image_url(:thumb) %>
         </div>
         <div class="post-right">
           <div class="post-user-name">

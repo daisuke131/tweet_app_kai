@@ -16,6 +16,11 @@ class ImageUploader < CarrierWave::Uploader::Base
 	def store_dir
 	  "user_images/#{model.id}"
 	end
+
+	#nilの時この画像を表示する
+	def default_url
+    "default_image.jpg"
+  end
    
 	# デフォルト画像リサイズ
 	process :resize_to_limit => [700, 700]

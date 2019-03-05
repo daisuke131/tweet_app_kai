@@ -10,6 +10,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def likes
+    @user = User.find(params[:id])
+    @likes = Like.where(user_id: params[:id])
+  end
+
   # def login
   #   @user = User.find_by(email: params[:email], password: params[:password])
   #   if @user
