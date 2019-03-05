@@ -19,9 +19,8 @@
             <div class="post-time">
                 <%= @post.created_at %>
             </div>
-
-            コメント数
-
+<span class="far fa-comment"></span>
+<%= @comments.count %>
             <%# いいね %>
             <% if Like.find_by(user_id:current_user.id, post_id: @post.id) %>
             <%= link_to(post_like_path(@post, current_user), method: :delete) do %>
@@ -39,12 +38,33 @@
             <div class="post-menus">
                 <%= link_to("[編集]", edit_post_path(@post)) %>
                 <%= link_to("[削除]", 
-	post_path(@post), 
-	method: :delete, 
-data: {confirm: '本当に削除しますか？'}) %>
+                post_path(@post), 
+                method: :delete, 
+                data: {confirm: '本当に削除しますか？'}) %>
             </div>
             <% end %>
 
+            <% @comments.each do |comment| %>
+            <div class="posts-index-item">
+                <%= comment.body %>
+                <%= link_to "[削除]", 
+                post_comment_path(@post, comment), 
+                method: :delete, 
+                data: {confirm: '本当に削除しますか？'} %>
+            </div>
+            <% end %>
+            <p>コメントを書く</p>
+            <%= form_for([@post, @post.comments.build]) do |f| %>
+            <% if @post.errors.full_messages_for(:body).any? %>
+            <div class="form-error">
+                <%= @post.errors.full_messages_for(:body)[0] %>
+            </div>
+            <% end %>
+            <p>
+                <%= f.text_area :body %>
+            </p>
+            <%= f.submit %>
+            <% end %>
         </div>
     </div>
 </div>

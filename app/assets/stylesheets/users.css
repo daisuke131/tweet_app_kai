@@ -123,3 +123,8 @@
   background-color: red !important;
   width: 100% !important;
 }
+
+.link-color a {
+  text-decoration: underline;
+  color: blue;
+}

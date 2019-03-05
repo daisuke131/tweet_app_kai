@@ -12,3 +12,5 @@ ja:
         email: Eメール
         password: パスワード
         password_confirmation: パスワード確認
+        remember_me: ログインしたままにする
+        current_password: パスワードを入力して修正
