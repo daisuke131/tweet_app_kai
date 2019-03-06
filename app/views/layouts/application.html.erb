@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>TweetAppKai</title>
+  <title>tweet_dummy</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -14,7 +14,7 @@
 <body>
   <header>
     <div class="header-logo">
-      <%= link_to("TweetApp", root_path) %>
+      <%= link_to("tweet dummy", root_path) %>
     </div>
     <ul class="header-menus">
       <% if user_signed_in? %>
@@ -48,16 +48,6 @@
         <%= link_to("ログイン", new_user_session_path) %>
       </li>
       <% end %>
-
-
-
-      <li>
-        <%#= link_to("ユーザー一覧", users_path) %>
-      </li>
-
-
-
-
     </ul>
   </header>
   <% if flash[:notice] %>

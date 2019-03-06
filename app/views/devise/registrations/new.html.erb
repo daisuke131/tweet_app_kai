@@ -9,41 +9,21 @@
         </div>
         <div class="field">
           <%= f.label :name %>
-          <% if resource.errors.full_messages_for(:name) %>
-          <div class="form-error">
-            <%= resource.errors.full_messages_for(:name)[0] %>
-          </div>
-          <% end %>
           <%= f.text_field :name, autofocus: true, maxlength: "10", placeholder:"10文字以上" %>
         </div>
 
         <div class="field">
           <%= f.label :email %>
-          <% if resource.errors.full_messages_for(:email) %>
-          <div class="form-error">
-            <%= resource.errors.full_messages_for(:email)[0] %>
-          </div>
-          <% end %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com" %>
         </div>
 
         <div class="field">
           <%= f.label :password %>
-          <% if resource.errors.full_messages_for(:password) %>
-          <div class="form-error">
-            <%= resource.errors.full_messages_for(:password)[0] %>
-          </div>
-          <% end %>
           <%= f.password_field :password, autocomplete: "new-password", placeholder:"#{@minimum_password_length}文字以上" %>
         </div>
 
         <div class="field">
           <%= f.label :password_confirmation %><br />
-          <% if resource.errors.full_messages_for(:password_confirmation) %>
-          <div class="form-error">
-            <%= resource.errors.full_messages_for(:password_confirmation)[0] %>
-          </div>
-          <% end %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
 
@@ -51,7 +31,6 @@
           <%= f.submit "登録" %>
         </div>
         <% end %>
-
         <%#= render "devise/shared/links" %>
       </div>
     </div>
