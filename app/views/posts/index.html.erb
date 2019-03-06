@@ -3,7 +3,7 @@
     <h1 class="users-heading">投稿一覧</h1>
         <% @posts.each do |post| %>
         <div class="posts-index-item">
-            <%= link_to post.title, post_path(post) %>
+            <%= link_to post.body, post_path(post) %>
         </div>
         <% end %>
     </div>
