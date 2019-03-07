@@ -1,10 +1,39 @@
 <div class="main posts-index">
     <div class="container">
-    <h1 class="users-heading">投稿一覧</h1>
+        <h1 class="users-heading">投稿一覧</h1>
         <% @posts.each do |post| %>
-        <div class="posts-index-item">
-            <%= link_to post.body, post_path(post) %>
+
+
+    
+
+
+        <div class="posts">
+
+            <div class="posts-left">
+                <%= link_to user_path(post.user) do %>
+                <%= image_tag post.user.image_url(:thumb), :size => '80x80', :class => "shadow img-thumbnail rounded-circle" %>
+                <% end %>
+            </div>
+            <div class="posts-right">
+                <div class="posts-user-name">
+                    <%= link_to post.user.name, user_path(post.user) %>
+                </div>
+                <div class="posts-index-item">
+                    <%= link_to post.body.gsub(/\r\n|\r|\n/, "<br />").html_safe, post_path(post) %>
+                </div>
+                <br>
+                <span class="far fa-comment"></span>
+                <%= post.comments.count %>
+
+                <%# いいね %>
+                <% @post = post %>
+                <%= render 'like' %>
+
+            </div>
+
         </div>
+</a>
+
         <% end %>
     </div>
 </div>

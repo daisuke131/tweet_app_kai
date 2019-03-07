@@ -19,20 +19,12 @@
             <div class="post-time">
                 <%= @post.created_at %>
             </div>
-<span class="far fa-comment"></span>
-<%= @comments.count %>
-            <%# いいね %>
-            <% if Like.find_by(user_id:current_user.id, post_id: @post.id) %>
-            <%= link_to(post_like_path(@post, current_user), method: :delete) do %>
-            <span class="fa fa-heart like-btn-unlike"></span>
-            <% end %>
-            <% else %>
-            <%= link_to(post_likes_path(@post), method: :post) do %>
-            <span class="far fa-heart like-btn"></span>
-            <% end %>
-            <% end %>
-            <%# いいね数 %>
-            <%= Like.where(post_id: @post.id).count %>
+
+            <span class="far fa-comment"></span>
+            <%= @comments.count %>
+            
+            <%# いいね機能 %>
+            <%= render 'like' %>
 
             <% if current_user.id == @post.user.id %>
             <div class="post-menus">
@@ -44,26 +36,54 @@
             </div>
             <% end %>
 
-            <% @comments.each do |comment| %>
-            <div class="posts-index-item">
-                <%= comment.body %>
-                <%= link_to "[削除]", 
-                post_comment_path(@post, comment), 
-                method: :delete, 
-                data: {confirm: '本当に削除しますか？'} %>
-            </div>
-            <% end %>
-            <p>コメントを書く</p>
             <%= form_for([@post, @post.comments.build]) do |f| %>
-            <% if @post.errors.full_messages_for(:body).any? %>
-            <div class="form-error">
-                <%= @post.errors.full_messages_for(:body)[0] %>
-            </div>
+            <%# <p> %>
+            <%= f.text_area :body, placeholder:"コメントを書く" %>
+            <%# </p> %>
+            <%= f.submit :class => "btn btn-outline-secondary float-right mb-3" %>
             <% end %>
-            <p>
-                <%= f.text_area :body %>
-            </p>
-            <%= f.submit %>
+            <div class="clearfix"></div>
+
+
+            <% @comments.each do |comment| %>
+            <% if comment.body %>
+            <div class="posts">
+
+                <div class="posts-left">
+                <%# コメントのユーザーの画像 %>
+                    <%= link_to user_path(comment.user) do %>
+                    <%= image_tag comment.user.image_url(:thumb), :size => '80x80', :class => "shadow img-thumbnail rounded-circle" %>
+                    <% end %>
+                </div>
+                <div class="posts-right">
+                    <div class="posts-user-name">
+                    <%# コメントのユーザー名 %>
+                        <%= link_to comment.user.name, user_path(comment.user) %>
+                    </div>
+
+
+
+                    <div class="comments-items">
+                    <%# コメント %>
+                        <%= comment.body.gsub(/\r\n|\r|\n/, "<br />").html_safe %>
+                        <br>
+
+                        <%# コメントの削除ボタン %>
+                        <% if current_user.id == comment.user.id %>
+                        <div class="comment-delete font-weight-lighter">
+                            <%= link_to "[削除]", 
+                            post_comment_path(@post, comment), 
+                            method: :delete, 
+                            data: {confirm: '本当に削除しますか？'},:class => "float-right" %>
+                        </div>
+                        <div class="clearfix"></div>
+                        <% end %>
+                    </div>
+                    <% end %>
+
+
+                </div>
+            </div>
             <% end %>
         </div>
     </div>

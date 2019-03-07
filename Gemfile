@@ -8,6 +8,10 @@ gem 'devise'
 #画像アップローダー
 gem 'carrierwave'
 gem 'rmagick'
+#bootstrap
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'
+
 #バリデーションメッセージ日本語化
 gem 'rails-i18n'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

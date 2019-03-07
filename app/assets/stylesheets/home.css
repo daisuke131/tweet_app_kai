@@ -1,36 +1,17 @@
 @charset "UTF-8";
 /* reset ================================ */
-* {
-  box-sizing: border-box;
-}
-
 html {
-  font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
   line-height: 1.7;
   letter-spacing: 1px;
 }
 
-ul,
-li {
+ul, li {
   list-style-type: none;
-  padding: 0;
-  margin: 0;
 }
 
 a {
   text-decoration: none;
   color: #2d3133;
-  font-size: 14px;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
 }
 
 input {
@@ -39,14 +20,14 @@ input {
 }
 
 form input[type="submit"] {
-  border: none;
   cursor: pointer;
+  font-size: 14px;
 }
 
 /* 共通レイアウト ================================ */
 body {
   color: #2d3133;
-  background-color: #55acee;
+  background-color: #55acee !important;
   margin: 0;
   min-height: 1vh;
 }
@@ -61,7 +42,7 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 600px !important;
   margin: 60px auto;
   padding-left: 15px;
   padding-right: 15px;

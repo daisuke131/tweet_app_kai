@@ -23,7 +23,7 @@
           <div class="post-user-name">
             <%= link_to(post.user.name, user_path(post.user.id)) %>
           </div>
-          <%= link_to(post.title, post_path(post.id)) %>
+          <%= link_to(post.body, post_path(post.id)) %>
         </div>
       </div>
     <% end %>

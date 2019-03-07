@@ -1,14 +1,6 @@
 <div class="form">
     <div class="form-body">
-        <%= form_for(@post) do |f| %>  
-        <p>タイトル</p>
-        <%# if @post.errors.messages[:title].any? %>
-    <div class="form-error">
-        <%#= @post.errors.messages[:title][0] %></div>
-    <%# end %>
-        <p>
-            <%#= f.text_field :title %>
-        </p>
+        <%= form_for(@post) do |f| %>
         <p>内容</p>
         <% if @post.errors.messages[:body].any? %>
     <div class="form-error">
