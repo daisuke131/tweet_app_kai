@@ -32,13 +32,10 @@
       </li>
 
       <li>
-        <%= link_to("ユーザー情報編集", edit_user_registration_path) %>
+        <%= link_to("ユーザー情報", user_path(current_user)) %>
       </li>
       <li>
         <%= link_to("ログアウト", destroy_user_session_path, method: :delete) %>
-      </li>
-      <li>
-        <%= current_user.name %>
       </li>
       <% else %>
       <li>

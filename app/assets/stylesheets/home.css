@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /* reset ================================ */
 html {
+  font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
   line-height: 1.7;
   letter-spacing: 1px;
 }
@@ -12,6 +13,11 @@ ul, li {
 a {
   text-decoration: none;
   color: #2d3133;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 input {
