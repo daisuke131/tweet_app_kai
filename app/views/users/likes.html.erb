@@ -2,32 +2,54 @@
   <div class="container">
     <div class="user">
       <%= image_tag @user.image_url(:thumb) %>
-      <h2><%= @user.name %></h2>
-      <p><%= @user.email %></p>
+      <h2>
+        <%= @user.name %>
+      </h2>
+      <p>
+        <%= @user.email %>
+      </p>
       <% if @user.id == current_user.id %>
-        <%= link_to("編集", edit_user_registration_path) %>
+      <%= link_to("編集", edit_user_registration_path) %>
       <% end %>
     </div>
-    
+
     <ul class="user-tabs">
-      <li><%= link_to("投稿", user_path(@user)) %></li>
-      <li class="active"><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+      <li>
+        <%= link_to("投稿", user_path(@user)) %>
+      </li>
+      <li class="active">
+        <%= link_to("いいね!", "/users/#{@user.id}/likes") %>
+      </li>
     </ul>
-    
+
+    <%# いいね一覧 %>
     <% @likes.each do |like| %>
-      <% post = Post.find_by(id: like.post_id) %> 
-      <div class="posts-index-item">
-        <div class="post-left">
-        <%= image_tag post.user.image_url(:thumb) %>
-        </div>
-        <div class="post-right">
-          <div class="post-user-name">
-            <%= link_to(post.user.name, user_path(post.user.id)) %>
-          </div>
-          <%= link_to(post.title, post_path(post.id)) %>
-        </div>
+    <% post = Post.find_by(id: like.post_id) %>
+    <%# <div class="posts-index-item"> %>
+    <div class="posts">
+
+
+
+
+      <div class="posts-left">
+        <%= link_to user_path(post.user) do %>
+        <%= image_tag post.user.image_url(:thumb), :size => '80x80', :class => "shadow img-thumbnail rounded-circle" %>
+        <% end %>
       </div>
+      <div class="posts-right pl-2 text-left">
+        <div class="posts-user-name">
+          <%= link_to post.user.name, user_path(post.user) %>
+        </div>
+        <div class="posts-index-item">
+          <%= link_to post.body.gsub(/\r\n|\r|\n/, "<br />").html_safe, post_path(post) %>
+        </div>
+
+      </div>
+
+
+      
+    </div>
     <% end %>
-    
+
   </div>
 </div>

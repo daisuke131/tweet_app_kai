@@ -1,31 +1,56 @@
 <div class="main user-show">
   <div class="container">
     <div class="user">
-        <%= image_tag @user.image_url(:thumb) %>
-      <h2><%= @user.name %></h2>
-      <p><%= @user.email %></p>
+      <%= image_tag @user.image_url(:thumb) %>
+      <h2>
+        <%= @user.name %>
+      </h2>
+      <p>
+        <%= @user.email %>
+      </p>
       <% if @user.id == current_user.id %>
-        <%= link_to("編集", edit_user_registration_path) %>
+      <%= link_to("編集", edit_user_registration_path) %>
       <% end %>
     </div>
-    
+
     <ul class="user-tabs">
-      <li class="active"><%= link_to("投稿", user_path(@user)) %></li>
-      <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+      <li class="active">
+        <%= link_to("投稿", user_path(@user)) %>
+      </li>
+      <li>
+        <%= link_to("いいね!", "/users/#{@user.id}/likes") %>
+      </li>
     </ul>
-    
+
+    <%# 投稿一覧 %>
     <% @user.posts.each do |post| %>
-      <div class="posts-index-item">
-        <div class="post-left">
-          <%= image_tag @user.image_url(:thumb) %>
+    <div class="posts text-left">
+      <div class="posts-right w-100">
+        <div class="posts-user-name">
+          <%= link_to post.user.name, user_path(post.user) %>
         </div>
-        <div class="post-right">
-          <div class="post-user-name">
-            <%= link_to(post.user.name, user_path(post.user.id)) %>
-          </div>
-          <%= link_to(post.body, post_path(post.id)) %>
+        <div class="posts-index-item">
+          <%= link_to post.body.gsub(/\r\n|\r|\n/, "<br />").html_safe, post_path(post) %>
         </div>
+        <div class="post-time">
+          <%= post.created_at %>
+        </div>
+        <span class="far fa-comment"></span>
+        <%= post.comments.count %>
+
+        <%# いいね %>
+        <% @post = post %>
+        <%= render 'like' %>
+<div class="post-menus">
+                <%= link_to("[編集]", edit_post_path(@post)) %>
+                <%= link_to("[削除]", 
+                post_path(@post), 
+                method: :delete, 
+                data: {confirm: '本当に削除しますか？'}) %>
+            </div>
       </div>
+
+    </div>
     <% end %>
   </div>
 </div>

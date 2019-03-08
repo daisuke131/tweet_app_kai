@@ -11,10 +11,7 @@
                 <%= link_to(@user.name, user_path(@user)) %>
             </div>
             <p>
-                <%#= @post.title %>
-            </p>
-            <p>
-                <%= @post.body %>
+                <%= @post.body.gsub(/\r\n|\r|\n/, "<br />").html_safe %>
             </p>
             <div class="post-time">
                 <%= @post.created_at %>
@@ -40,7 +37,7 @@
             <%# <p> %>
             <%= f.text_area :body, placeholder:"コメントを書く" %>
             <%# </p> %>
-            <%= f.submit :class => "btn btn-outline-secondary float-right mb-3" %>
+            <%= f.submit "コメント", :class => "btn btn-outline-secondary float-right mb-3" %>
             <% end %>
             <div class="clearfix"></div>
 

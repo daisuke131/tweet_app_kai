@@ -6,32 +6,35 @@
 .posts {
   padding: 20px 30px;
   background-color: white;
-  // overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
-display: flex;
-a {
-  text-decoration: none;
-  color: #2d3133;
-  font-size: 24px;
-  letter-spacing: 10;
-  font-weight: bold;
+  display: flex;
 
-  &:hover {
+  a {
     text-decoration: none;
+    color: #2d3133;
+    font-size: 24px;
+    letter-spacing: 10;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: none;
     }
-}
-.posts-left {
-  width: 20%;
-}
+  }
+
+  .posts-left {
+    width: 20%;
+  }
+
   .posts-right {
     width: 80%;
+
     // padding-left: 30px;
     .posts-index-item {
       a {
         font-size: 16px;
         font-weight: normal;
       }
-  
+
     }
 
   }
@@ -139,21 +142,22 @@ a {
   color: #ff2581;
 }
 
-.posts-show-item {
-  
-}
+.posts-show-item {}
 
 .new_comment {
   text-align: center;
+
   textarea {
     width: 100%;
     height: 80px;
     font-size: 16px;
   }
+
   input {
     border: 1px solid #000;
   }
 }
+
 .fa {
   font-size: 20px;
   margin-right: 3px;
@@ -164,9 +168,7 @@ a {
   margin-right: 3px;
 }
 
-.comments-items {
-
-}
+.comments-items {}
 
 .comment-delete {
   a {
@@ -175,4 +177,3 @@ a {
     font-size: 13px;
   }
 }
-
