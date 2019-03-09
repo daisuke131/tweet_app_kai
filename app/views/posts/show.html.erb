@@ -14,11 +14,11 @@
                 <%= @post.body.gsub(/\r\n|\r|\n/, "<br />").html_safe %>
             </p>
             <div class="post-time">
-                <%= @post.created_at %>
+                <%= @post.created_at.to_s %>
             </div>
 
             <span class="far fa-comment"></span>
-            <%= @comments.count %>
+            <span id="comment_count"><%= @comments.count %></span>
             
             <%# いいね機能 %>
             <%= render 'likes/like', post: @post %>
@@ -34,54 +34,13 @@
             <% end %>
 
             <%= form_for([@post, @post.comments.build]) do |f| %>
-            <%# <p> %>
             <%= f.text_area :body, placeholder:"コメントを書く" %>
-            <%# </p> %>
             <%= f.submit "コメント", :class => "btn btn-outline-secondary float-right mb-3" %>
             <% end %>
             <div class="clearfix"></div>
 
 
-            <% @comments.each do |comment| %>
-            <% if comment.body %>
-            <div class="posts">
-
-                <div class="posts-left">
-                <%# コメントのユーザーの画像 %>
-                    <%= link_to user_path(comment.user) do %>
-                    <%= image_tag comment.user.image_url(:thumb), :size => '80x80', :class => "shadow img-thumbnail rounded-circle" %>
-                    <% end %>
-                </div>
-                <div class="posts-right">
-                    <div class="posts-user-name">
-                    <%# コメントのユーザー名 %>
-                        <%= link_to comment.user.name, user_path(comment.user) %>
-                    </div>
-
-
-
-                    <div class="comments-items">
-                    <%# コメント %>
-                        <%= comment.body.gsub(/\r\n|\r|\n/, "<br />").html_safe %>
-                        <br>
-
-                        <%# コメントの削除ボタン %>
-                        <% if current_user.id == comment.user.id %>
-                        <div class="comment-delete font-weight-lighter">
-                            <%= link_to "[削除]", 
-                            post_comment_path(@post, comment), 
-                            method: :delete, 
-                            data: {confirm: '本当に削除しますか？'},:class => "float-right" %>
-                        </div>
-                        <div class="clearfix"></div>
-                        <% end %>
-                    </div>
-                    <% end %>
-
-
-                </div>
-            </div>
-            <% end %>
+            <%= render 'comments/comment', comments: @comments, post: @post %>
         </div>
     </div>
 </div>

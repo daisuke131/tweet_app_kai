@@ -11,6 +11,11 @@ gem 'rmagick'
 #bootstrap
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+# メール機能確認
+group :development, :test do
+gem 'letter_opener'
+gem 'letter_opener_web' 
+end
 
 #バリデーションメッセージ日本語化
 gem 'rails-i18n'
