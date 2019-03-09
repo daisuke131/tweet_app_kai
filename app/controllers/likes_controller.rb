@@ -2,32 +2,22 @@
 
 class LikesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_vialiables
 
-  def create
-    current_user.likes.create(post_id: params[:post_id])
-    if path[:action] == 'index'
-      redirect_to posts_path
-    else
-      # redirect_to "/posts/#{params[:post_id]}"
-      redirect_to post_path(params[:post_id])
-    end
+  def like
+    current_user.likes.create(post_id: @post.id)
+    @post.reload
   end
 
-  def destroy
-    @like = current_user.likes.find_by(post_id: params[:post_id])
+  def unlike
+    @like = current_user.likes.find_by(post_id: @post.id)
     @like.destroy
-    if path[:action] == 'index'
-      redirect_to posts_path
-    else
-      # redirect_to "/posts/#{params[:post_id]}"
-      redirect_to post_path(params[:post_id])
-
-    end
+    @post.reload
   end
 
     private
-
-  def path
-    Rails.application.routes.recognize_path(request.referer)
-  end
+def set_vialiables
+  @post = Post.find(params[:id])
+  @id_name = "#like-link-#{@post.id}"
+end
   end

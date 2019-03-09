@@ -21,13 +21,14 @@
                 <div class="posts-index-item">
                     <%= link_to post.body.gsub(/\r\n|\r|\n/, "<br />").html_safe, post_path(post) %>
                 </div>
-                <br>
+                <div class="post-time">
+          <%= post.created_at.to_s %>
+        </div>
                 <span class="far fa-comment"></span>
                 <%= post.comments.count %>
 
                 <%# いいね %>
-                <% @post = post %>
-                <%= render 'like' %>
+                <%= render 'likes/like', post: post %>
 
             </div>
 

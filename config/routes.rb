@@ -2,8 +2,10 @@
 
 Rails.application.routes.draw do
   root 'home#top'
-  get 'about' => 'home#about'
-  get 'users/:id/likes' => 'users#likes'
+  get 'about', to: 'home#about'
+  get 'users/:id/likes', to: 'users#likes'
+  post '/like/:id', to: 'likes#like', as: 'like'
+  delete '/like/:id', to: 'likes#unlike', as: 'unlike'
   devise_for :users, skip: [:sessions, :password], 
   :controllers => {
     :registrations => 'users/registrations',
@@ -16,7 +18,6 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :show]
   resources :posts do
-    resources :likes, only: %i[create destroy]
-    resources :comments, only: %i[create destroy]
+    resources :comments, only: [:create, :destroy]
   end
 end

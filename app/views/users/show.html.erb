@@ -26,28 +26,26 @@
     <% @user.posts.each do |post| %>
     <div class="posts text-left">
       <div class="posts-right w-100">
-        <div class="posts-user-name">
-          <%= link_to post.user.name, user_path(post.user) %>
-        </div>
         <div class="posts-index-item">
           <%= link_to post.body.gsub(/\r\n|\r|\n/, "<br />").html_safe, post_path(post) %>
         </div>
         <div class="post-time">
-          <%= post.created_at %>
+          <%= post.created_at.to_s %>
         </div>
         <span class="far fa-comment"></span>
         <%= post.comments.count %>
 
         <%# いいね %>
-        <% @post = post %>
-        <%= render 'like' %>
+        <%= render 'likes/like', post: post %>
+<% if current_user.id == post.id %>
 <div class="post-menus">
-                <%= link_to("[編集]", edit_post_path(@post)) %>
+                <%= link_to("[編集]", edit_post_path(post)) %>
                 <%= link_to("[削除]", 
-                post_path(@post), 
+                post_path(post), 
                 method: :delete, 
                 data: {confirm: '本当に削除しますか？'}) %>
             </div>
+            <% end %>
       </div>
 
     </div>

@@ -21,7 +21,7 @@
             <%= @comments.count %>
             
             <%# いいね機能 %>
-            <%= render 'like' %>
+            <%= render 'likes/like', post: @post %>
 
             <% if current_user.id == @post.user.id %>
             <div class="post-menus">

@@ -1,0 +1,14 @@
+<span id="like-link-<%= post.id %>">
+<% if Like.find_by(user_id:current_user.id, post_id: post.id) %>
+<%= link_to(unlike_path(post), method: :delete, remote: true) do %>
+<span class="fa fa-heart like-btn-unlike"></span>
+<% end %>
+<% else %>
+<%= link_to(like_path(post), method: :post, remote: true) do %>
+<span class="far fa-heart like-btn"></span>
+<% end %>
+<% end %>
+
+<%# いいね数 %>
+<%= post.likes_count %>
+</span>
